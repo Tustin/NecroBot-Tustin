@@ -53,8 +53,9 @@ namespace PoGo.NecroBot.CLI
             var strEgg = "EGG";
             var strDebug = "DEBUG";
             var strUpdate = "UPDATE";
+            var strSnipe = "SNIPING";
 
-            if(_session != null)
+            if (_session != null)
             {
                 strError     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryError);
                 strAttention = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryAttention);
@@ -124,6 +125,10 @@ namespace PoGo.NecroBot.CLI
                 case LogLevel.Update:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strUpdate}) {message}");
+                    break;
+                case LogLevel.Snipe:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strSnipe}) {message}");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.White;

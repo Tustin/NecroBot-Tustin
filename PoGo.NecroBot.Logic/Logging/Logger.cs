@@ -81,7 +81,8 @@ namespace PoGo.NecroBot.Logic.Logging
         Egg = 10,
         Update = 11,
         Info = 12,
-        Debug = 13,
+        Snipe = 13,
+        Debug = 14,
         
     }
 }

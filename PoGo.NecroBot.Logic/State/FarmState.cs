@@ -33,6 +33,8 @@ namespace PoGo.NecroBot.Logic.State
                 await UseIncubatorsTask.Execute(session);
             }
 
+            await SnipePokemonTask.Execute(session, true);
+
             if (session.LogicSettings.UseGpxPathing)
             {
                 await FarmPokestopsGpxTask.Execute(session);

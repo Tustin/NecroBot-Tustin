@@ -142,6 +142,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await eggWalker.ApplyDistance(distance);
 
+                if (session.LogicSettings.SnipeAtPokestops)
+                {
+                    await SnipePokemonTask.Execute(session);
+                }
+
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
@@ -150,10 +155,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await session.Inventory.RefreshCachedInventory();
                     }
                     await RecycleItemsTask.Execute(session);
-                    if (session.LogicSettings.SnipeAtPokestops)
-                    {
-                        await SnipePokemonTask.Execute(session);
-                    }
+
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(session);
