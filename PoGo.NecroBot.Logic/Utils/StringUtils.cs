@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Utils
             return
                 enumerable.GroupBy(i => i.ItemId)
                     .Select(kvp => new {ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount)})
-                    .Select(y => $"{y.Amount} x {y.ItemName}")
+                    .Select(y => $"{y.ItemName.Substring(4)} (x{y.Amount})")
                     .Aggregate((a, b) => $"{a}, {b}");
         }
     }

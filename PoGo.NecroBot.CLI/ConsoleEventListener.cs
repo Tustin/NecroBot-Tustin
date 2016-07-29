@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(PokemonEvolveEvent evt, ISession session)
         {
             Logger.Write(evt.Result == EvolvePokemonResponse.Types.Result.Success
-                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, evt.Id, evt.Exp)
+                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, evt.Id, evt.nId, evt.Cp, evt.nCp, evt.Exp, evt.Result)
                 : session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedFailed, evt.Id, evt.Result,
                     evt.Id),
                 LogLevel.Evolve);
@@ -105,9 +105,9 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(FortTargetEvent evt, ISession session)
         {
-            Logger.Write(
+            /*Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, evt.Name, Math.Round(evt.Distance)),
-                LogLevel.Info, ConsoleColor.DarkRed);
+                LogLevel.Info, ConsoleColor.DarkRed);*/
         }
 
         public void HandleEvent(PokemonCaptureEvent evt, ISession session)

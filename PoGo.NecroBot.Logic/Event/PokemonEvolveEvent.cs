@@ -11,6 +11,9 @@ namespace PoGo.NecroBot.Logic.Event
     {
         public int Exp;
         public PokemonId Id;
+        public PokemonId nId;
         public EvolvePokemonResponse.Types.Result Result;
+        public int Cp;
+        public int nCp;
     }
 }

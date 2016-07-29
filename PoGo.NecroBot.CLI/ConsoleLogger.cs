@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.CLI
             var strPokestop = "POKESTOP";
             var strFarming = "FARMING";
             var strRecycling = "RECYCLING";
-            var strPKMN = "PKMN";
+            var strPKMN = "POKEMON";
             var strTransfered = "TRANSFERED"; 
             var strEvolved = "EVOLVED";
             var strBerry = "BERRY";
@@ -79,7 +79,7 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strError}) {message}");
                     break;
                 case LogLevel.Warning:
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strAttention}) {message}");
                     break;
                 case LogLevel.Info:
@@ -87,7 +87,7 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strInfo}) {message}");
                     break;
                 case LogLevel.Pokestop:
-                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPokestop}) {message}");
                     break;
                 case LogLevel.Farming:
@@ -99,11 +99,11 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strRecycling}) {message}");
                     break;
                 case LogLevel.Caught:
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPKMN}) {message}");
                     break;
                 case LogLevel.Transfer:
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strTransfered}) {message}");
                     break;
                 case LogLevel.Evolve:

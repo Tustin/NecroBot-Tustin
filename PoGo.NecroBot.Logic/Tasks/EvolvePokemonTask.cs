@@ -28,7 +28,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
                 var luckyEgg = luckyEggs.FirstOrDefault();
-                
+
                 //maybe there can be a warning message as an else condition of luckyEgg checks, like; 
                 //"There is no Lucky Egg, so, your UseLuckyEggsMinPokemonAmount setting bypassed."
                 if (session.LogicSettings.UseLuckyEggsWhileEvolving && luckyEgg != null && luckyEgg.Count > 0)
@@ -51,7 +51,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.EventDispatcher.Send(new PokemonEvolveEvent
                     {
                         Id = pokemon.PokemonId,
+                        nId = evolveResponse.EvolvedPokemonData.PokemonId,
                         Exp = evolveResponse.ExperienceAwarded,
+                        Cp = pokemon.Cp,
+                        nCp = evolveResponse.EvolvedPokemonData.Cp,
                         Result = evolveResponse.Result
                     });
                 }
