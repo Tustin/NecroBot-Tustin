@@ -119,8 +119,8 @@ namespace PoGo.NecroBot.Logic.Common
 
     public class Translation : ITranslation
     {
-        [JsonProperty("TranslationStrings", 
-            ItemTypeNameHandling = TypeNameHandling.Arrays, 
+        [JsonProperty("TranslationStrings",
+            ItemTypeNameHandling = TypeNameHandling.Arrays,
             ItemConverterType = typeof(KeyValuePairConverter),
             ObjectCreationHandling = ObjectCreationHandling.Replace,
             DefaultValueHandling = DefaultValueHandling.Populate)]
@@ -267,7 +267,7 @@ namespace PoGo.NecroBot.Logic.Common
                 var input = File.ReadAllText(fullPath);
 
                 var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
                 translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
@@ -287,7 +287,7 @@ namespace PoGo.NecroBot.Logic.Common
         public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))
