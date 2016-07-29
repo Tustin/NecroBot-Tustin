@@ -67,7 +67,7 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(ItemRecycledEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.EventItemRecycled, evt.Count, evt.Id),
+            Logger.Write(session.Translation.GetTranslation(TranslationString.EventItemRecycled, evt.Count, evt.Id.ToString().Substring(4)),
                 LogLevel.Recycling);
         }
 
@@ -75,12 +75,12 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(evt.WasAddedNow
                 ? session.Translation.GetTranslation(TranslationString.IncubatorPuttingEgg, evt.KmRemaining)
-                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining));
+                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining), LogLevel.Egg);
         }
 
         public void HandleEvent(EggHatchedEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, evt.PokemonId.ToString()));
+            Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, evt.PokemonId.ToString()), LogLevel.Egg);
         }
 
         public void HandleEvent(FortUsedEvent evt, ISession session)
@@ -161,7 +161,34 @@ namespace PoGo.NecroBot.CLI
             var familyCandies = evt.FamilyCandies > 0
                 ? session.Translation.GetTranslation(TranslationString.Candies, evt.FamilyCandies)
                 : "";
-
+            if (evt.Id == POGOProtos.Enums.PokemonId.Snorlax        ||
+                evt.Id == POGOProtos.Enums.PokemonId.Dragonite      ||
+                evt.Id == POGOProtos.Enums.PokemonId.Venusaur       ||
+                evt.Id == POGOProtos.Enums.PokemonId.Charizard      ||
+                evt.Id == POGOProtos.Enums.PokemonId.Blastoise      ||
+                evt.Id == POGOProtos.Enums.PokemonId.Kangaskhan     ||
+                evt.Id == POGOProtos.Enums.PokemonId.Farfetchd      ||
+                evt.Id == POGOProtos.Enums.PokemonId.MrMime         ||
+                evt.Id == POGOProtos.Enums.PokemonId.Gyarados       ||
+                evt.Id == POGOProtos.Enums.PokemonId.Lapras         ||
+                evt.Id == POGOProtos.Enums.PokemonId.Ditto          ||
+                evt.Id == POGOProtos.Enums.PokemonId.Vaporeon       ||
+                evt.Id == POGOProtos.Enums.PokemonId.Jolteon        ||
+                evt.Id == POGOProtos.Enums.PokemonId.Flareon        ||
+                evt.Id == POGOProtos.Enums.PokemonId.Porygon        ||
+                evt.Id == POGOProtos.Enums.PokemonId.Articuno       ||
+                evt.Id == POGOProtos.Enums.PokemonId.Zapdos         ||
+                evt.Id == POGOProtos.Enums.PokemonId.Moltres        ||
+                evt.Id == POGOProtos.Enums.PokemonId.Mew            ||
+                evt.Id == POGOProtos.Enums.PokemonId.Mewtwo         )
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            else if (catchType == "Lure" || catchType == "Incense")
+                Console.ForegroundColor = ConsoleColor.Green;
+            else if (evt.Cp >= 2000)
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            else if (evt.Cp >= 1250)
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            else Console.ForegroundColor = ConsoleColor.White;
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, evt.Id,
                     evt.Level, evt.Cp, evt.MaxCp, evt.Perfection.ToString("0.00"), evt.Probability,
@@ -171,6 +198,7 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(NoPokeballEvent evt, ISession session)
         {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Logger.Write(session.Translation.GetTranslation(TranslationString.EventNoPokeballs, evt.Id, evt.Cp),
                 LogLevel.Caught);
         }

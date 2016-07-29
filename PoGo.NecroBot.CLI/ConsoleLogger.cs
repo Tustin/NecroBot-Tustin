@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.CLI
             var strEgg = "EGG";
             var strDebug = "DEBUG";
             var strUpdate = "UPDATE";
-            var strSnipe = "SNIPING"; // Test commit
+            var strSnipe = "SNIPING";
 
             if (_session != null)
             {
@@ -79,8 +79,10 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strError}) {message}");
                     break;
                 case LogLevel.Warning:
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strAttention}) {message}");
+                    Console.BackgroundColor = ConsoleColor.Black;
                     break;
                 case LogLevel.Info:
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -99,7 +101,7 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strRecycling}) {message}");
                     break;
                 case LogLevel.Caught:
-                    Console.ForegroundColor = ConsoleColor.White;
+                    //Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPKMN}) {message}");
                     break;
                 case LogLevel.Transfer:
