@@ -72,6 +72,7 @@ namespace PoGo.NecroBot.Logic
         int DelayBetweenPokemonCatch { get; }
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
+        bool UsePokemonsToAlwaysDelete { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int MaxTravelDistanceInMeters { get; }
@@ -98,6 +99,8 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
+
+        ICollection<PokemonId> PokemonsToAlwaysDelete { get; }
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
         SnipeSettings PokemonToSnipe { get; } 

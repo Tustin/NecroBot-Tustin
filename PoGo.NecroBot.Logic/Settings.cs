@@ -112,6 +112,7 @@ namespace PoGo.NecroBot.CLI
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
+        public bool UsePokemonsToAlwaysDelete = false;
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
         public bool SnipeAtPokestops = true;
@@ -231,6 +232,13 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Spearow,
             PokemonId.Zubat,
             PokemonId.Doduo
+        };
+
+        public List<PokemonId> PokemonsToAlwaysDelete = new List<PokemonId>
+        {
+            PokemonId.Pinsir,
+            PokemonId.Zubat,
+            PokemonId.Golbat
         };
 
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
@@ -490,6 +498,7 @@ namespace PoGo.NecroBot.CLI
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
+        public bool UsePokemonsToAlwaysDelete => _settings.UsePokemonsToAlwaysDelete;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
         public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
@@ -508,6 +517,7 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public ICollection<PokemonId> PokemonsToAlwaysDelete => _settings.PokemonsToAlwaysDelete;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;

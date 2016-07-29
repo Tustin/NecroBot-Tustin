@@ -6,6 +6,8 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Enums;
+using System.Collections.Generic;
 
 #endregion
 
@@ -56,6 +58,33 @@ namespace PoGo.NecroBot.Logic.Tasks
                 });
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+            }
+            if (session.LogicSettings.UsePokemonsToAlwaysDelete)
+            {
+                var alwaysDelete = await session.Inventory.GetAlwaysDeletePokemon(session.LogicSettings.PokemonsToAlwaysDelete);
+
+                foreach (var deleteme in alwaysDelete)
+                {
+                    await session.Client.Inventory.TransferPokemon(deleteme.Id);
+                    await session.Inventory.DeletePokemonFromInvById(deleteme.Id);
+
+                    var setting = pokemonSettings.Single(q => q.PokemonId == deleteme.PokemonId);
+                    var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
+
+                    family.Candy++;
+
+                    session.EventDispatcher.Send(new TransferPokemonEvent
+                    {
+                        Id = deleteme.PokemonId,
+                        Perfection = PokemonInfo.CalculatePokemonPerfection(deleteme),
+                        Cp = deleteme.Cp,
+                        BestCp = deleteme.Cp,
+                        BestPerfection = PokemonInfo.CalculatePokemonPerfection(deleteme),
+                        FamilyCandies = family.Candy
+                    });
+
+                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+                }
             }
         }
     }

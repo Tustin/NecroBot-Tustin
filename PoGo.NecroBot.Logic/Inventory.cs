@@ -52,7 +52,11 @@ namespace PoGo.NecroBot.Logic
             }
             return await RefreshCachedInventory();
         }
-
+        public async Task<IEnumerable<PokemonData>> GetAlwaysDeletePokemon(IEnumerable<PokemonId> alwaysDelete)
+        {
+            var myPokemon = await GetPokemons();
+            return myPokemon.Where(i => alwaysDelete.Contains(i.PokemonId));
+        }
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
             bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
             IEnumerable<PokemonId> filter = null)
@@ -70,6 +74,7 @@ namespace PoGo.NecroBot.Logic
             {
                 pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
             }
+
             if (keepPokemonsThatCanEvolve)
             {
                 var results = new List<PokemonData>();
