@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.CLI
             var strEgg = "EGG";
             var strDebug = "DEBUG";
             var strUpdate = "UPDATE";
-            var strSnipe = "SNIPING";
+            var strSnipe = "SNIPING"; // Test commit
 
             if (_session != null)
             {
