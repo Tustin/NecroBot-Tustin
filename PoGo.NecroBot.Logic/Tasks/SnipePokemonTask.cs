@@ -275,10 +275,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
                         else
                         {
-                            session.EventDispatcher.Send(new NoticeEvent()
+                            /*session.EventDispatcher.Send(new NoticeEvent()
                             {
                                 Message = session.Translation.GetTranslation(Common.TranslationString.NoPokemonToSnipe)
-                            });
+                            });*/
                         }
                     }
             }
