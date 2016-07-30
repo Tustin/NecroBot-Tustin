@@ -4,17 +4,9 @@
 ![alt text][1.1] <br/><br/>
 
 <!-- title -->
-<<<<<<< HEAD
-<h1>A Pokemon Go Bot based on FeroxRevs API</h1>
-<h3>NOTE: This is a modified fork of the original NecroBot. This will mostly be used to try out new things that most likely don't need to be added to the original NecroBot. You can find the original NecroBot here: https://github.com/NecronomiconCoding/NecroBot.</h3>
-<!-- disclaimer -->
-![alt text][1.1] <strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong>![alt text][1.1]<br/><br/>
-![alt text][1.2] <br/><br/>
-=======
 <h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
 Visit our new Website! : http://necrobot.io
 
->>>>>>> be2f597f2eaf9e4c50e900d1d647c15c491b8725
 Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
 <br/>
 

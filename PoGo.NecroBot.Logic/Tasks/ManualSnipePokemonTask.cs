@@ -16,18 +16,26 @@ using System.Net.Sockets;
 using System.Threading;
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class ManualSnipePokemonTask
+    public static class ManualSnipePokemonTask
     {
+        public static bool currentlySniping = false;
+
+        public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return (!currentlySniping) ? Task.Run(() => Execute(session, cancellationToken), cancellationToken) : null;
+        }
         public static async Task Execute(ISession session, CancellationToken cancellationToken, bool startup = false)
         {
             List<Snipe.SnipeResult> contents = Snipe.ReadFile(Directory.GetCurrentDirectory() + "\\Config\\snipe.txt");
-            if (contents.Count > 0)
+            if (contents.Count > 0 && !currentlySniping)
             {
+                currentlySniping = true;
                 foreach (Snipe.SnipeResult s in contents)
                 {
                     await SnipePokemon(session, s.location, s.pokemonId);
                 }
                 File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config\\snipe.txt", string.Empty);
+                currentlySniping = false;
             }
             else if (startup)
                 Logger.Write("Skipping snipe because Config/snipe.txt is empty or doesn't exist.", Logging.LogLevel.Warning);

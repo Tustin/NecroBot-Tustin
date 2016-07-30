@@ -96,9 +96,11 @@ namespace PoGo.NecroBot.CLI
             {
                 if (Console.KeyAvailable)
                 {
-                    var info = Console.ReadKey();
+                    var info = Console.ReadKey(true);
                     if (info.Key == ConsoleKey.Enter)
                         break;
+                    else if (info.Key == ConsoleKey.S)
+                        ManualSnipePokemonTask.AsyncStart(session, new CancellationToken());
                 }
                 Thread.Sleep(5);
             }
