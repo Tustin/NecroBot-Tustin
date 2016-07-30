@@ -193,7 +193,7 @@ namespace PoGo.NecroBot.CLI
                 session.Translation.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, evt.Id,
                     evt.Level, evt.Cp, evt.MaxCp, evt.Perfection.ToString("0.00"), evt.Probability,
                     evt.Distance.ToString("F2"),
-                    returnRealBallName(evt.Pokeball), evt.BallAmount, familyCandies), evt.Distance > 10000 ? LogLevel.Snipe : LogLevel.Caught);
+                    returnRealBallName(evt.Pokeball), evt.BallAmount, evt.Exp, familyCandies), evt.Distance > 10000 ? LogLevel.Snipe : LogLevel.Caught);
         }
 
         public void HandleEvent(NoPokeballEvent evt, ISession session)
