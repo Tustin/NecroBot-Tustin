@@ -14,6 +14,7 @@ using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings.Master;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -265,10 +266,10 @@ namespace PoGo.NecroBot.Logic
 
         private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
         {
-            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
-            if (amountOfPokeballsToKeep < 1)
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokeballsToKeep;
+            if (amountOfPokeballsToKeep < 0)
             {
-                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logger.Write("TotalAmountOfPokeballsToKeep cannot be less than 0.", LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -281,9 +282,9 @@ namespace PoGo.NecroBot.Logic
         private List<ItemData> GetPotionsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
         {
             var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
-            if (amountOfPotionsToKeep < 1)
+            if (amountOfPotionsToKeep < 0)
             {
-                Logging.Logger.Write("TotalAmountOfPotionsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logger.Write("TotalAmountOfPotionsToKeep cannot be less than 0.", LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -296,9 +297,9 @@ namespace PoGo.NecroBot.Logic
         private List<ItemData> GetRevivesToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
         {
             var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
-            if (amountOfRevivesToKeep < 1)
+            if (amountOfRevivesToKeep < 0)
             {
-                Logging.Logger.Write("TotalAmountOfRevivesToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logger.Write("TotalAmountOfRevivesToKeep cannot be less than 0.", LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 

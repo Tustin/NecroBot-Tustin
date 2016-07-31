@@ -140,7 +140,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseTransferIVForSnipe = false;
         public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
-        public int TotalAmountOfPokebalsToKeep = 150;
+        public int TotalAmountOfPokeballsToKeep = 150;
         public int TotalAmountOfPotionsToKeep = 100;
         public int TotalAmountOfRevivesToKeep = 50;
 
@@ -612,7 +612,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
         public bool SnipeIgnoreUnknownIV => _settings.SnipeIgnoreUnknownIV;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
-        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }
