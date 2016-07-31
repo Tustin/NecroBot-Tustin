@@ -25,6 +25,7 @@ The original NecroBot project was removed for unknown reasons, so I merged my ot
  - [Use lucky egg while evolve]
  - [Egg Hatching Automatically]
  - [Multi bot support]
+ - [Always delete Pokemon of certain type]
 
 <h2><a name="credits">Credits</a></h2>
 A big thank you goes to Ferox's hard work on the API & Console. Without him, this would not have been possible. Also a big thanks to the original NecroBot team and contributers (you can see most of them in the "Contributors" tab on this repo).
