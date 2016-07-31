@@ -29,11 +29,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
     public class PokemonLocation
     {
-        public long id { get; set; }
-        public double expiration_time { get; set; }
+        public long expires { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
-        public int pokemonId { get; set; }
+        public int pokemon_id { get; set; }
+        public string pokemon_name { get; set; }
 
         public PokemonLocation(double _latitude, double _longitude)
         {
@@ -73,15 +73,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 
     public class ScanResult
     {
-        public string status { get; set; }
-        public List<PokemonLocation> pokemon { get; set; }
+        public List<PokemonLocation> pokemons { get; set; }
     }
 
     public static class SnipePokemonTask
     {
         public static List<PokemonLocation> locsVisited = new List<PokemonLocation>();
         private static List<SniperInfo> snipeLocations = new List<SniperInfo>();
-        private static DateTime lastSnipe = DateTime.Now;
+        private static DateTime lastSnipe = DateTime.MinValue;
 
         public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -242,6 +241,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 }
                 else
+                {
 
                     foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                     {
@@ -250,11 +250,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var scanResult = SnipeScanForPokemon(location);
 
                         var locationsToSnipe = new List<PokemonLocation>();
-                        if (scanResult.pokemon != null)
+                        if (scanResult.pokemons != null)
                         {
-                            var filteredPokemon = scanResult.pokemon.Where(q => pokemonIds.Contains((PokemonId)q.pokemonId));
+                            var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId)q.pokemon_id));
                             var notVisitedPokemon = filteredPokemon.Where(q => !locsVisited.Contains(q));
-                            var notExpiredPokemon = notVisitedPokemon.Where(q => q.expiration_time < currentTimestamp);
+                            var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < currentTimestamp);
 
                             locationsToSnipe.AddRange(notExpiredPokemon);
                         }
@@ -285,6 +285,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });*/
                         }
                     }
+                }
             }
 
         }
@@ -292,8 +293,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static ScanResult SnipeScanForPokemon(Location location)
         {
             var formatter = new System.Globalization.NumberFormatInfo() { NumberDecimalSeparator = "." };
-            var uri = $"https://pokevision.com/map/data/{location.Latitude.ToString(formatter)}/{location.Longitude.ToString(formatter)}";
-
+            //We have to use this new API because Pokevision is shutdown indefinitely. Thanks to the guys at Skiplagged for providing this API!!
+            //You need to sepcify a lower and upper bounds for the coordinate you want to search.
+            Location upperBounds = new Location { Latitude = location.Latitude + 0.04, Longitude = location.Longitude + 0.01 };
+            Location lowerBounds = new Location { Latitude = location.Latitude - 0.04, Longitude = location.Longitude - 0.01 };
+            var uri = $"http://skiplagged.com/api/pokemon.php?bounds={lowerBounds.Latitude.ToString(formatter)},{lowerBounds.Longitude.ToString(formatter)},{upperBounds.Latitude.ToString(formatter)},{upperBounds.Longitude.ToString(formatter)}";
             ScanResult scanResult;
             try
             {
@@ -311,8 +315,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 scanResult = new ScanResult()
                 {
-                    status = "fail",
-                    pokemon = new List<PokemonLocation>()
+                    pokemons = new List<PokemonLocation>()
                 };
             }
             return scanResult;
