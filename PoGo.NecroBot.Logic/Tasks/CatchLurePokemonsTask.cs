@@ -7,6 +7,8 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
+using POGOProtos.Enums;
+using System;
 
 #endregion
 
@@ -14,6 +16,25 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchLurePokemonsTask
     {
+        public static async Task<Action> CatchLurePokemon(ISession session, FortData fortData)
+        {
+            Action returnAction = () => { };
+            if (fortData?.LureInfo != null && fortData.LureInfo.ActivePokemonId != PokemonId.Missingno)
+            {
+                var encounterId = fortData.LureInfo.EncounterId;
+                var encounter = await session.Client.Encounter.EncounterLurePokemon(encounterId, fortData.Id);
+                if (encounter.Result == DiskEncounterResponse.Types.Result.Success)
+                {
+                    returnAction =
+                        async () =>
+                        {
+                            await CatchPokemonTask.Execute(session, encounterId, fortData.Id, encounter,encounter.PokemonData.PokemonId);
+                        };
+                }
+            }
+            return returnAction;
+        }
+
         public static async Task Execute(ISession session, FortData currentFortData, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();

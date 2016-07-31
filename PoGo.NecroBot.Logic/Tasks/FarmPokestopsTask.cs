@@ -14,6 +14,7 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
+using MoreLinq;
 
 #endregion
 
@@ -183,7 +184,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task<List<FortData>> GetPokeStops(ISession session)
+
+        public static async Task<List<FortData>> GetPokeStops(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 
@@ -202,5 +204,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             return pokeStops.ToList();
         }
+
     }
 }

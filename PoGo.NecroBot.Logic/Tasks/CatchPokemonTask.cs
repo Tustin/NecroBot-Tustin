@@ -11,6 +11,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using POGOProtos.Enums;
 
 #endregion
 
@@ -139,6 +140,22 @@ namespace PoGo.NecroBot.Logic.Tasks
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
+        public static async Task Execute(ISession session, ulong encounterId, string id, DiskEncounterResponse encounter, PokemonId pokemonId)
+        {
+            CatchPokemonResponse caughtPokemonResponse;
+            var attempts = 0;
+            do
+            {
+                var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
+                var pokeball = await GetBestBall(session, encounter, (float)probability);
+
+                caughtPokemonResponse = await session.Client.Encounter.CatchPokemon(encounterId, id, pokeball);
+                Logging.Logger.Write($"[{caughtPokemonResponse.Status} - {attempts}] {pokemonId} encountered. {PokemonInfo.CalculatePokemonPerfection(encounter?.PokemonData)}% perfect. {encounter?.PokemonData?.Cp} CP. Probabilty: {probability}", Logging.LogLevel.Info);
+                attempts++;
+            } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
+                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
+        }
+
         private static async Task<ItemId> GetBestBall(ISession session, dynamic encounter, float probability)
         {
             var pokemonCp = encounter is EncounterResponse
@@ -195,6 +212,16 @@ namespace PoGo.NecroBot.Logic.Tasks
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
             session.EventDispatcher.Send(new UseBerryEvent {Count = berry.Count});
+        }
+
+        public static async Task<IOrderedEnumerable<MapPokemon>> GetNearbyPokemonClosestFirst(ISession session)
+        {       
+            var mapObjects = await session.Client.Map.GetMapObjects();
+            var catchable = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons).ToList();
+
+            return
+                catchable.OrderBy(t =>
+                        LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, t.Latitude, t.Longitude));
         }
     }
 }

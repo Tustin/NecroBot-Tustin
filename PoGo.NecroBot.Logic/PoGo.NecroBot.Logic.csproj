@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="POGOProtos, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\POGOProtos.1.4.0\lib\net45\POGOProtos.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +90,8 @@
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BotService.cs" />
+    <Compile Include="Tasks\CatchBurstPokemonTask.cs" />
+    <Compile Include="Tasks\FarmPokestopsTeleportTask.cs" />
     <Compile Include="Tasks\ManualSnipePokemonTask.cs" />
     <Compile Include="Tasks\PokemonListTask.cs" />
     <Compile Include="Tasks\Farm.cs" />

@@ -10,6 +10,8 @@ using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+using POGOProtos.Map.Fort;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -29,6 +31,13 @@ namespace PoGo.NecroBot.Logic
         public Navigation(Client client)
         {
             _client = client;
+        }
+        public static async Task TeleportToPokestop(ISession session, FortData closestPokestop)
+        {
+            if (closestPokestop?.Latitude == null)
+                return;
+            
+            await session.Client.Player.UpdatePlayerLocation(closestPokestop.Latitude, closestPokestop.Longitude, 10);
         }
 
         public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation, double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking, CancellationToken cancellationToken)
