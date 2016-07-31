@@ -1,13 +1,7 @@
-<!-- define warning icon -->
-[1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
-<!-- header -->
-![alt text][1.1] <br/><br/>
-
 <!-- title -->
-<h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
-Visit our new Website! : http://necrobot.io
+<h1>NecroBot-Tustin - a fork of the defunct NecroBot with new features.</h1>
 
-Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
+The original NecroBot project was removed for unknown reasons, so I merged my other forked repo (one that was actually considered a forked repository) with this one again since I don't need to update from their repo anymore. This bot will be updated periodically with new features and optimizations.
 <br/>
 
 <h2><a name="features">Features</a></h2>
@@ -30,21 +24,11 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
  - [Egg Hatching Automatically]
  - [Multi bot support]
 
-<h2><a name="getting-started">Getting Started</a></h2>
-Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
-<br/>
-
-<h2><a name="donating">Donating</a></h2>
-<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=POGO%20Bot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
-
-<h6><em>[ All PayPal donations are distributed amongst our most active collaborators. ]</em></h6><br/>
 <a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
 
 <h2><a name="credits">Credits</a></h2>
-A big thank you goes to Feroxs' hard work on the API & Console. Without him, this would not have been possible. <3
+A big thank you goes to Ferox's hard work on the API & Console. Without him, this would not have been possible. Also a big thanks to the original NecroBot team and contributers (you can see most of them in the "Contributors" tab on this repo).
 <br/>
-Thanks to everyone who volunteered by contributing via Pull Requests!
 
 <h2><a name="legal">Legal</a></h2>
 
