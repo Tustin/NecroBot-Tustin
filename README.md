@@ -4,6 +4,8 @@
 The original NecroBot project was removed for unknown reasons, so I merged my other forked repo (one that was actually considered a forked repository) with this one again since I don't need to update from their repo anymore. This bot will be updated periodically with new features and optimizations.
 <br/>
 
+<a name="btc">**Donate Bitcoins to FeroxRev (the API library developer):** *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
+
 <h2><a name="features">Features</a></h2>
 
  - [PTC Login / Google]
@@ -23,8 +25,6 @@ The original NecroBot project was removed for unknown reasons, so I merged my ot
  - [Use lucky egg while evolve]
  - [Egg Hatching Automatically]
  - [Multi bot support]
-
-<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
 
 <h2><a name="credits">Credits</a></h2>
 A big thank you goes to Ferox's hard work on the API & Console. Without him, this would not have been possible. Also a big thanks to the original NecroBot team and contributers (you can see most of them in the "Contributors" tab on this repo).
